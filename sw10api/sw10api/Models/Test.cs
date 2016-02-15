@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 
 namespace sw10api.Models {
     [DataContract]
-    class Test {
+    public class Test {
 
         public Test() { }
 

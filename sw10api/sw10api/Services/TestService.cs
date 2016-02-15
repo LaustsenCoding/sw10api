@@ -17,7 +17,7 @@ namespace sw10api.Services {
 
         [WebInvoke(Method = "GET", UriTemplate = "GetTest", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public String GetTest() {
-            return "Der er hul igennem";
+            return "Jamen Andreas, Der er hul igennem";
         }
 
     }

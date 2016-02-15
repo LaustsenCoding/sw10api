@@ -46,17 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IFact.cs" />
     <Compile Include="Interfaces\ITest.cs" />
+    <Compile Include="Interfaces\ITrip.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\TripService.cs" />
     <Compile Include="Services\RestService.cs" />
+    <Compile Include="Services\FactService.cs" />
     <Compile Include="Services\TestService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\sw9program\CarDataProject\CarDataProject\CarDataProject.csproj">
+      <Project>{c67279c0-a98e-4f97-b60d-89ef7184de22}</Project>
+      <Name>CarDataProject</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

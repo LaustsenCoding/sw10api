@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sw10api", "sw10api\sw10api.csproj", "{DF0EE5A8-3FDC-4F80-B136-3C99CC845416}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDataProject", "..\..\sw9program\CarDataProject\CarDataProject\CarDataProject.csproj", "{C67279C0-A98E-4F97-B60D-89EF7184DE22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DF0EE5A8-3FDC-4F80-B136-3C99CC845416}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF0EE5A8-3FDC-4F80-B136-3C99CC845416}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF0EE5A8-3FDC-4F80-B136-3C99CC845416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67279C0-A98E-4F97-B60D-89EF7184DE22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67279C0-A98E-4F97-B60D-89EF7184DE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67279C0-A98E-4F97-B60D-89EF7184DE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67279C0-A98E-4F97-B60D-89EF7184DE22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
