@@ -13,12 +13,12 @@ using CarDataProject;
 namespace sw10api.Services {
     public partial class RestService : ITrip  {
 
-        [WebInvoke(Method = "GET", UriTemplate = "GetTrip?tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        public Trip GetTrip(int tripid) {
-            
+        [WebInvoke(Method = "GET", UriTemplate = "GetTrip?carid={carid}&tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public Trip GetTrip(Int16 carid, Int64 tripid) {
+            Console.WriteLine("Connection Established");
             DBController dbc = new DBController();
 
-            Trip trip = dbc.GetTripByTripId(tripid);
+            Trip trip = dbc.GetTripByCarIdAndTripId(carid, tripid);
             dbc.Close();
 
             return trip;
