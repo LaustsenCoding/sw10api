@@ -14,7 +14,7 @@ namespace sw10api.Services {
     public partial class RestService : IFact  {
 
         [WebInvoke(Method = "GET", UriTemplate = "GetFact?tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        public Fact GetFact(int tripid) {
+        public Fact GetFact(Int64 tripid) {
 
             DBController dbc = new DBController();
             List<Fact> facts = dbc.GetFactsByTripId(tripid);
@@ -23,6 +23,18 @@ namespace sw10api.Services {
             Console.WriteLine(facts[1].ToString());
 
             return facts[1];
+        }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetFacts?carid={carid}&tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public List<Fact> GetFacts(Int16 carid, Int64 tripid) {
+
+            DBController dbc = new DBController();
+            List<Fact> facts = dbc.GetFactsByCarIdANDTripId(carid, tripid);
+            dbc.Close();
+
+            Console.WriteLine(facts[1].ToString());
+
+            return facts;
         }
 
         [WebInvoke(Method = "GET", UriTemplate = "GetMyTest", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
