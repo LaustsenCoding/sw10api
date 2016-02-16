@@ -29,12 +29,16 @@ namespace sw10api.Services {
         public List<Fact> GetFacts(Int16 carid, Int64 tripid) {
 
             DBController dbc = new DBController();
-            List<Fact> facts = dbc.GetFactsByCarIdANDTripId(carid, tripid);
+            List<Fact> facts = dbc.GetFactsByCarIdAndTripId(carid, tripid);
             dbc.Close();
 
             Console.WriteLine(facts[1].ToString());
-
-            return facts;
+            try {
+                return facts;
+            } catch(Exception e) {
+                Console.WriteLine(e.ToString());
+            }
+            return null;
         }
 
         [WebInvoke(Method = "GET", UriTemplate = "GetMyTest", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
