@@ -12,19 +12,19 @@ namespace sw10api.Models {
 
         public Test() { }
 
-        public Test(int id) {
-            this.GetOrSetId = id;
+        public Test(String text) {
+            this.GetOrSetText = text;
         }
 
-        [DataMember(Name = "id")]
-        public int GetOrSetId {
+        [DataMember]
+        public String GetOrSetText {
             get {
-                return _accountId;
+                return _text;
             }
             set {
-                _accountId = value;
+                _text = value;
             }
         }
-        private int _accountId;
+        private String _text;
     }
 }

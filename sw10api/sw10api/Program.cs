@@ -47,8 +47,12 @@ namespace sw10api {
             WebServiceHost host = new WebServiceHost(typeof(RestService), uri);
             host.AddServiceEndpoint(typeof(ITest), new WebHttpBinding(), new Uri(uri + "/Test"));
             host.AddServiceEndpoint(typeof(ITrip), new WebHttpBinding(), new Uri(uri + "/Trip"));
-            host.AddServiceEndpoint(typeof(IFact), new WebHttpBinding(), new Uri(uri + "/Fact"));
 
+            WebHttpBinding binding = new WebHttpBinding();
+            binding.MaxBufferSize = int.MaxValue;
+            binding.MaxReceivedMessageSize = int.MaxValue;
+            host.AddServiceEndpoint(typeof(IFact), binding, new Uri(uri + "/Fact"));
+            
             host.Open();
 
             foreach (ServiceEndpoint se in host.Description.Endpoints) {

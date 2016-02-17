@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using System.IO;
 
 using CarDataProject;
 
@@ -16,7 +17,9 @@ namespace sw10api.Interfaces {
         Fact GetFact(Int64 tripid);
         [OperationContract]
         List<Fact> GetFacts(Int16 carid, Int64 tripid);
+        //[OperationContract]
+        //Test GetMyTest();
         [OperationContract]
-        Test GetMyTest();
+        void AddFacts(Stream facts);
     }
 }
