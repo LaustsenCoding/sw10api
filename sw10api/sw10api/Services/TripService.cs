@@ -15,7 +15,7 @@ namespace sw10api.Services {
 
         [WebInvoke(Method = "GET", UriTemplate = "GetTrip?carid={carid}&tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public Trip GetTrip(Int16 carid, Int64 tripid) {
-            Console.WriteLine("Connection Established");
+
             DBController dbc = new DBController();
 
             Trip trip = dbc.GetTripByCarIdAndTripId(carid, tripid);
@@ -33,7 +33,19 @@ namespace sw10api.Services {
             dbc.Close();
             
             return trips;
-        }   
+        }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetTripsForOverview?carid={carid}&offset={offset}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public List<Trip> GetTripsForOverview(Int16 carid, int offset) {
+
+            DBController dbc = new DBController();
+
+            List<Trip> trips = dbc.GetTripsForOverviewByCarId(carid, offset);
+
+            dbc.Close();
+
+            return trips;
+        }
 
     }
 }

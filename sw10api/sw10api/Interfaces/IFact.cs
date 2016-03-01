@@ -17,6 +17,8 @@ namespace sw10api.Interfaces {
         Fact GetFact(Int64 tripid);
         [OperationContract]
         List<Fact> GetFacts(Int16 carid, Int64 tripid);
+        [OperationContract]
+        List<Fact> GetFactsForMap(Int16 carid, Int64 tripid);
         //[OperationContract]
         //Test GetMyTest();
         [OperationContract]

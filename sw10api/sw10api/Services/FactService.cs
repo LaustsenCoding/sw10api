@@ -44,6 +44,24 @@ namespace sw10api.Services {
             }
             return null;
         }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetFactsForMap?carid={carid}&tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public List<Fact> GetFactsForMap(Int16 carid, Int64 tripid) {
+
+            DBController dbc = new DBController();
+            List<Fact> facts = dbc.GetFactsForMapByCarIdAndTripId(carid, tripid);
+            dbc.Close();
+
+            try {
+                return facts;
+            } catch (Exception e) {
+                Console.WriteLine(e.ToString());
+            }
+            return null;
+        }
+
+
+
         /*
         [WebInvoke(Method = "GET", UriTemplate = "GetMyTest", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public Test GetMyTest() {
