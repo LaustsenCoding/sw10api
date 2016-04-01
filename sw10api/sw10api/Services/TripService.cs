@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.ServiceModel.Web;
 using sw10api.Interfaces;
 using sw10api.Models;
+using System.Data;
+
 
 using CarDataProject;
 
@@ -17,9 +19,9 @@ namespace sw10api.Services {
         public Trip GetTrip(Int16 carid, Int64 tripid) {
 
             DBController dbc = new DBController();
-
-            Trip trip = dbc.GetTripByCarIdAndTripId(carid, tripid);
+            DataRow row = dbc.GetTripViewByCarIdAndTripId(carid, tripid);
             dbc.Close();
+            TripView trip = new TripView(row);
 
             return trip;
         }
