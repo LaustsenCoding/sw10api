@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.ServiceModel.Web;
 using System.IO;
@@ -72,25 +73,50 @@ namespace sw10api.Services {
         */
         [WebInvoke(Method = "POST", UriTemplate = "AddFacts", ResponseFormat = WebMessageFormat.Json)]
         public void AddFacts(Stream facts) {
+            //Reading the stream of data sent from client
             Console.WriteLine("Message Received");
             var sr = new StreamReader(facts);
             string text = sr.ReadToEnd();
             Console.WriteLine("It was: " + text);
-
+            
+            //Parsing the nested JSON objects to a JArray
             JArray allfacts = JArray.Parse(text) as JArray;
             dynamic allthefacts = allfacts;
 
-            foreach(dynamic fact in allthefacts) {
-                Console.WriteLine(fact);
-                Console.WriteLine(fact.entryid);
+            //Assigning a tripid
+            DBController dbc = new DBController();
+            Int16 carId = (Int16)allthefacts[0].carid;
+            Int64 assignedTripId = dbc.AddTripInformation(carId);
+            dbc.Close();
+
+            Console.WriteLine("Assigned TripId: " + assignedTripId);
+
+            //Converting each JSON object to a Fact object
+            List<Fact> factObjs = new List<Fact>();
+
+            foreach (dynamic fact in allthefacts) {
+                fact.tripid = assignedTripId;
+                factObjs.Add(new Fact(fact));
             }
 
-            Fact f = new Fact(allthefacts[1]);
-            Console.WriteLine(f.ToString());
+
+            //Add Facts to DB
+            dbc = new DBController();
+
+            foreach (Fact f in factObjs) {
+                dbc.AddFact(f);
+            }
+
+            dbc.Close();
 
 
+            Console.WriteLine("Number of facts: " + factObjs.Count());
+            TripFactUpdater.UpdateTrip(carId, assignedTripId);
+
+            return;
         }
-
+        
+        
 
     }
 }
