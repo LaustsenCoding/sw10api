@@ -37,12 +37,12 @@ namespace sw10api.Services {
             return trips;
         }
 
-        [WebInvoke(Method = "GET", UriTemplate = "GetTripsForOverview?carid={carid}&offset={offset}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        public List<Trip> GetTripsForOverview(Int16 carid, int offset) {
+        [WebInvoke(Method = "GET", UriTemplate = "GetTripsForList?carid={carid}&offset={offset}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public List<Trip> GetTripsForTripList(Int16 carid, int offset) {
 
             DBController dbc = new DBController();
 
-            List<Trip> trips = dbc.GetTripsForOverviewByCarId(carid, offset);
+            List<Trip> trips = dbc.GetTripsForListByCarId(carid, offset);
 
             dbc.Close();
 

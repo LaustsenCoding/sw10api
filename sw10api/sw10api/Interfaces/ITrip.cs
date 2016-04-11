@@ -16,6 +16,6 @@ namespace sw10api.Interfaces {
         [OperationContract]
         List<Trip> GetTrips(Int16 carid);
         [OperationContract]
-        List<Trip> GetTripsForOverview(Int16 carid, int offset);
+        List<Trip> GetTripsForList(Int16 carid, int offset);
     }
 }
