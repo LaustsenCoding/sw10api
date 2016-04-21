@@ -12,6 +12,8 @@ namespace sw10api.Interfaces {
     [ServiceContract]
     public interface ITrip {
         [OperationContract]
+        string GetTrip(Int16 carid, Int64 tripid);
+        [OperationContract]
         string GetTrips(Int16 carid);
         [OperationContract]
         string GetTripsForList(Int16 carid, int offset);

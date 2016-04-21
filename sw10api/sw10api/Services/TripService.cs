@@ -10,20 +10,18 @@ using CarDataProject;
 
 namespace sw10api.Services {
     public partial class RestService : ITrip  {
-        /*
+        
         [WebInvoke(Method = "GET", UriTemplate = "GetTrip?carid={carid}&tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        public Trip GetTrip(Int16 carid, Int64 tripid) {
+        public string GetTrip(Int16 carid, Int64 tripid) {
 
             DBController dbc = new DBController();
-            DataRow row = dbc.GetTripViewByCarIdAndTripId(carid, tripid);
+            Trip trip = dbc.GetTripByCarIdAndTripId(carid, tripid);
             dbc.Close();
-            TripView trip = new TripView(row);
 
-            return trip;
+            return JsonConvert.SerializeObject(trip);
         }
-        */
 
-        [WebInvoke(Method = "GET", UriTemplate = "GetTrips?carid={carid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "GetTrips?carid={carid}", ResponseFormat = WebMessageFormat.Json)]
         public string GetTrips(Int16 carid) {
 
             DBController dbc = new DBController();
