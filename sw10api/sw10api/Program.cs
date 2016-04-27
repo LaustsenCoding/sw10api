@@ -59,6 +59,9 @@ namespace sw10api {
             ServiceEndpoint endpoint2 = host.AddServiceEndpoint(typeof(ITrip), new WebHttpBinding(), new Uri(uri + "/Trip"));
             //endpoint2.EndpointBehaviors.Add(new WebHttpBehavior());
             ServiceEndpoint endpoint4 = host.AddServiceEndpoint(typeof(ICar), new WebHttpBinding(), new Uri(uri + "/Car"));
+
+            ServiceEndpoint endpoint5 = host.AddServiceEndpoint(typeof(ICompetition), new WebHttpBinding(), new Uri(uri + "/Competition"));
+
             //WebHttpBinding binding = new WebHttpBinding();
             //binding.MaxBufferSize = int.MaxValue;
             //binding.MaxReceivedMessageSize = int.MaxValue;

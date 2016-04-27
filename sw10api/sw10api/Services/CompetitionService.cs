@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ServiceModel.Web;
 using System.IO;
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using sw10api.Interfaces;
@@ -37,24 +38,38 @@ namespace sw10api.Services {
             return;
         }
 
-
-
+        [WebInvoke(Method = "GET", UriTemplate = "GetAllCompetitions", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public string GetAllCompetitions() {
-            throw new NotImplementedException();
+            DBController dbc = new DBController();
+            List<Competition> allCompetitions = dbc.GetAllCompetitions();
+            dbc.Close();
+
+            return JsonConvert.SerializeObject(allCompetitions);
         }
 
         [WebInvoke(Method = "GET", UriTemplate = "GetCompetitionById?competitionid={competitionid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public string GetCompetitionById(Int16 competitionid) {
-            
+            DBController dbc = new DBController();
+            Competition competition = dbc.GetCompetitionByCompetitionId(competitionid);
+            dbc.Close();
 
-            return "";
+            return JsonConvert.SerializeObject(competition);
         }
-
-        public string GetCompetitionRank(Int16 carid, Int16 competitionid) {
+        /*
+        public string GetCompetitionRank(Int16 carid, Int16 competitionid, Int64 tripid) {
             throw new NotImplementedException();
         }
-
+        */
+        [WebInvoke(Method = "GET", UriTemplate = "GetCompetitionsByCarId?carid={carid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public string GetCompetitionsByCarId(Int16 carid) {
+            DBController dbc = new DBController();
+            List<Competition> carCompetitions = dbc.GetCompetitionByCarId(carid);
+            dbc.Close();
+
+            return JsonConvert.SerializeObject(carCompetitions);
+        }
+
+        public string GetCompetitionLeaderboard(short competitionid) {
             throw new NotImplementedException();
         }
     }

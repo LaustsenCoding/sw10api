@@ -24,7 +24,9 @@ namespace sw10api.Interfaces {
         void CompetitionSignDown(Int16 carid, Int16 competitionid);
         [OperationContract]
         string AddTripToCompetition(Int16 competitionid);
+        //[OperationContract]
+        //string GetCompetitionRank(Int16 carid, Int16 competitionid, Int64 tripid);
         [OperationContract]
-        string GetCompetitionRank(Int16 carid, Int16 competitionid);
+        string GetCompetitionLeaderboard(Int16 competitionid);
     }
 }
