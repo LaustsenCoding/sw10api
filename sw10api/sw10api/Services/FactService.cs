@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel.Web;
 using System.IO;
-
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using sw10api.Interfaces;
@@ -27,30 +27,24 @@ namespace sw10api.Services {
         */
 
         [WebInvoke(Method = "GET", UriTemplate = "GetFacts?carid={carid}&tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        public void GetFacts(Int16 carid, Int64 tripid) {
+        public string GetFacts(Int16 carid, Int64 tripid) {
 
             DBController dbc = new DBController();
             List<Fact> facts = dbc.GetFactsByCarIdAndTripIdNoQuality(carid, tripid);
             dbc.Close();
-            /*
-            try {
-                return JsonConvert.SerializeObject(facts);
-            } catch(Exception e) {
-                Console.WriteLine(e.ToString());
-            }
-            return null;
-            */
+            
+            return JsonConvert.SerializeObject(facts);
         }
 
         [WebInvoke(Method = "GET", UriTemplate = "GetFactsForMap?carid={carid}&tripid={tripid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        public void GetFactsForMap(Int16 carid, Int64 tripid) {
+        public string GetFactsForMap(Int16 carid, Int64 tripid) {
 
             DBController dbc = new DBController();
             List<Fact> facts = dbc.GetFactsForMapByCarIdAndTripId(carid, tripid);
             dbc.Close();
 
 
-            //return JsonConvert.SerializeObject(facts);
+            return JsonConvert.SerializeObject(facts);
 
         }
 

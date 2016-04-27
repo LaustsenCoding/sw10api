@@ -14,9 +14,9 @@ namespace sw10api.Interfaces {
     [ServiceContract]
     public interface IFact {
         [OperationContract]
-        void GetFacts(Int16 carid, Int64 tripid);
+        string GetFacts(Int16 carid, Int64 tripid);
         [OperationContract]
-        void GetFactsForMap(Int16 carid, Int64 tripid);
+        string GetFactsForMap(Int16 carid, Int64 tripid);
         [OperationContract]
         string GetMyTest();
         //Test GetMyTest();
