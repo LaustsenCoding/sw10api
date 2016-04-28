@@ -44,11 +44,11 @@ namespace sw10api.Services {
             return JsonConvert.SerializeObject(car);
         }
 
-        [WebInvoke(Method = "POST", UriTemplate = "UpdateCarWithUsername?imei={imei}&username={username}")]
-        public void UpdateCarWithUsername(Int64 imei, string username) {
+        [WebInvoke(Method = "GET", UriTemplate = "UpdateCarWithUsername?carid={carid}&username={username}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public void UpdateCarWithUsername(Int16 carid, string username) {
             
             DBController dbc = new DBController();
-            dbc.UpdateCarWithUsername(imei, username);
+            dbc.UpdateCarWithUsername(carid, username);
             dbc.Close();
 
             return;

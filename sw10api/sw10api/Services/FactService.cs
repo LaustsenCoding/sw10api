@@ -62,7 +62,7 @@ namespace sw10api.Services {
         }
         */
         [WebInvoke(Method = "POST", UriTemplate = "AddFacts")]
-        public void AddFacts(Stream facts) {
+        public string AddFacts(Stream facts) {
 
             //Reading the stream of data sent from client
             Console.WriteLine("Message Received");
@@ -113,7 +113,7 @@ namespace sw10api.Services {
                 Console.WriteLine(e.ToString());
             }
 
-            return;
+            return "succes";
         }
 
 

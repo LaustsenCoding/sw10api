@@ -14,5 +14,7 @@ namespace sw10api.Interfaces {
     public interface ICar {
         [OperationContract]
         string GetOrCreateCar(long imei);
+        [OperationContract]
+        void UpdateCarWithUsername(Int16 carid, string username);
     }
 }

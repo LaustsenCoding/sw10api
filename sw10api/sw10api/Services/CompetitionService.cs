@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using sw10api.Interfaces;
+using sw10api.Models;
 using CarDataProject;
 
 
@@ -71,6 +72,42 @@ namespace sw10api.Services {
 
         public string GetCompetitionLeaderboard(short competitionid) {
             throw new NotImplementedException();
+        }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetCompetitionsForListView?carid={carid}&offset={offset}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public string GetCompetitionsForListView(Int16 carid, int offset) {
+            DBController dbc = new DBController();
+
+            Car car = dbc.GetCarByCarId(carid);
+
+            List<Competition> competitions = dbc.GetAllCompetitionsWithOffset(offset);
+            List<Int16> CarCompetitions = dbc.GetCompetitionIdByCarId(carid);
+
+            dbc.Close();
+
+            if (!car.Username.ToLower().StartsWith("lb")) {
+                competitions.Remove(competitions.Single(p => p.CompetitionId == 1));
+            }
+            List<CompetitionView> competitionsForListView = new List<CompetitionView>();
+
+            foreach (Competition com in competitions) {
+                CompetitionView comView = new CompetitionView(com);
+                
+                if (CarCompetitions.Contains(com.CompetitionId)) {
+                    comView.IsParticipating = true;    
+                }
+
+                //When we know how to log it...
+                comView.ParticipantCount = 0;
+                comView.Rank = 0;
+                comView.AttemptCount = 0;
+
+                competitionsForListView.Add(comView);
+            }
+
+
+
+            return JsonConvert.SerializeObject(competitionsForListView);
         }
     }
 }

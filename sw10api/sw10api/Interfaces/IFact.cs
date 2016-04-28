@@ -22,6 +22,6 @@ namespace sw10api.Interfaces {
         //Test GetMyTest();
 
         [OperationContract]
-        void AddFacts(Stream facts);
+        string AddFacts(Stream facts);
     }
 }

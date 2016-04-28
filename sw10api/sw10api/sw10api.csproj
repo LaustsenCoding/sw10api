@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IFact.cs" />
     <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Interfaces\ITrip.cs" />
+    <Compile Include="Models\CompetitionView.cs" />
     <Compile Include="Models\TripView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
