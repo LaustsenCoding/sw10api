@@ -130,6 +130,9 @@ namespace sw10api.Services {
             try {
                 DBController dbc = new DBController();
                 Car car = dbc.GetCarByCarId(carid);
+                int countrank = 1;
+
+                List<CompetingIn> CompetingIns = new List<CompetingIn>();
                 List<Competition> competitions = dbc.GetAllCompetitionsWithOffset(offset);
                 List<Int16> CarCompetitions = dbc.GetCompetitionIdByCarId(carid);
                 dbc.Close();
@@ -146,11 +149,20 @@ namespace sw10api.Services {
                         comView.IsParticipating = true;
                     }
 
+                    CompetingIns = dbc.GetCompetitionInByCompetitionId(com.CompetitionId);
+                    List<CompetingIn> templist = CompetingIns.OrderByDescending(o => o.Score).ToList();
+                   
                     //When we know how to log it...
-                    comView.ParticipantCount = 0;
-                    comView.Rank = 0;
-                    comView.AttemptCount = 0;
+                    comView.ParticipantCount = templist.Count;
 
+                    foreach(CompetingIn compin in templist) {
+                        if(compin.CarId == carid) {
+                            comView.AttemptCount = compin.Attempts;
+                            comView.Rank = countrank;
+                        } else {  countrank++; }
+                    }
+
+                    countrank = 1;
                     competitionsForListView.Add(comView);
                 }
 
