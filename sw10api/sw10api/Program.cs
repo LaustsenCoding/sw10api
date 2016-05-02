@@ -47,14 +47,19 @@ namespace sw10api {
 
 
 
-            //Uri uri = new Uri("http://localhost:8000/RestService");
-            Uri uri = new Uri("http://172.19.1.124:9220/RestService");
+            Uri uri = new Uri("http://localhost:8000/RestService");
+            //Uri uri = new Uri("http://172.19.1.124:9220/RestService");
             WebServiceHost host = new WebServiceHost(typeof(RestService));
 
             ServiceEndpoint endpoint3 = host.AddServiceEndpoint(typeof(IFact), new WebHttpBinding(), new Uri(uri + "/Fact"));
 
+            //WebHttpBinding binding = new WebHttpBinding();
+            //binding.MaxBufferSize = int.MaxValue;
+            //binding.MaxReceivedMessageSize = int.MaxValue;
+            //ServiceEndpoint endpoint1 = host.AddServiceEndpoint(typeof(ITest), binding, new Uri(uri + "/Test"));
             ServiceEndpoint endpoint1 = host.AddServiceEndpoint(typeof(ITest), new WebHttpBinding(), new Uri(uri + "/Test"));
-            //ServiceEndpoint endpoint1 = host.AddServiceEndpoint(typeof(ITest), new WebHttpBinding(), "");
+
+
 
             ServiceEndpoint endpoint2 = host.AddServiceEndpoint(typeof(ITrip), new WebHttpBinding(), new Uri(uri + "/Trip"));
             //endpoint2.EndpointBehaviors.Add(new WebHttpBehavior());

@@ -22,8 +22,8 @@ namespace sw10api.Interfaces {
         void CompetitionSignUp(Int16 carid, Int16 competitionid);
         [OperationContract]
         void CompetitionSignDown(Int16 carid, Int16 competitionid);
-        [OperationContract]
-        string AddTripToCompetition(Int16 competitionid);
+        //This one is not open on service-endpoint        
+        string AddTripToCompetition(Int16 competitionid, Int16 carId, Int64 tripId);
         //[OperationContract]
         //string GetCompetitionRank(Int16 carid, Int16 competitionid, Int64 tripid);
         [OperationContract]
