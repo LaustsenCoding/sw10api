@@ -26,10 +26,10 @@ namespace sw10api {
             Console.ReadLine();
             */
 
-            
 
-            
-            startRestService();
+
+
+            startRestService113();
         }
 
         static void startRestService() {
@@ -82,19 +82,22 @@ namespace sw10api {
 
         }
 
+        static void startRestService113() {
+            Uri uri = new Uri("http://localhost:8000/RestService");
+            //Uri uri = new Uri("http://172.19.1.113:8000/RestService");
+            WebServiceHost host = new WebServiceHost(typeof(RestService));
+
+            ServiceEndpoint endpoint1 = host.AddServiceEndpoint(typeof(IMeasure), new WebHttpBinding(), new Uri(uri + "/Measure"));
+
+            host.Open();
+
+            foreach (ServiceEndpoint se in host.Description.Endpoints) {
+                Console.WriteLine(string.Format("Binding name:{0}, Address:{1}, Contract:{2}", se.Binding.Name, se.Address.ToString(), se.Contract.Name));
+            }
+            Console.ReadLine();
+        }
     }
 }
 
 
-/*
-        var binding = new WebHttpBinding()
-        {
-            Name = "JSON",
-            MaxReceivedMessageSize = 1000000,
-            MaxBufferSize = 1000000,
-            ReaderQuotas = { MaxStringContentLength = 1000000 },
-            HostNameComparisonMode = HostNameComparisonMode.StrongWildcard,
-            Security = { Mode = WebHttpSecurityMode.None }
-        };
 
-*/

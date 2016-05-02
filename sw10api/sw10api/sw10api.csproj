@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IMeasure.cs" />
     <Compile Include="Interfaces\ICar.cs" />
     <Compile Include="Interfaces\ICompetition.cs" />
     <Compile Include="Interfaces\IFact.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Models\TripView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MeasureService.cs" />
     <Compile Include="Services\CarService.cs" />
     <Compile Include="Services\CompetitionService.cs" />
     <Compile Include="Services\TripService.cs" />
