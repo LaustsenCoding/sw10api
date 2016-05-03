@@ -33,12 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GeoCoordinatePortable, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GeoCoordinate.1.0.0\lib\portable-net45+wp80+win+wpa81\GeoCoordinatePortable.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CarDataProject">
+      <HintPath>..\..\..\SW9project\CarDataProject\CarDataProject\bin\Debug\CarDataProject.exe</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -59,6 +58,7 @@
     <Compile Include="Interfaces\IFact.cs" />
     <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Interfaces\ITrip.cs" />
+    <Compile Include="Models\CompetitionOverview.cs" />
     <Compile Include="Models\CompetitionView.cs" />
     <Compile Include="Models\TripView.cs" />
     <Compile Include="Program.cs" />
@@ -73,12 +73,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\sw9program\CarDataProject\CarDataProject\CarDataProject.csproj">
-      <Project>{c67279c0-a98e-4f97-b60d-89ef7184de22}</Project>
-      <Name>CarDataProject</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
