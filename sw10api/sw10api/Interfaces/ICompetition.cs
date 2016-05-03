@@ -30,5 +30,7 @@ namespace sw10api.Interfaces {
         string GetCompetitionLeaderboard(Int16 competitionid);
         [OperationContract]
         string GetCompetitionsForListView(Int16 carid, int offset);
+        [OperationContract]
+        string GetCompetitionForOverview(Int16 competitionid, Int16 carid);
     }
 }

@@ -150,9 +150,13 @@ namespace sw10api.Services {
                     }
 
                     CompetingIns = dbc.GetCompetitionInByCompetitionId(com.CompetitionId);
-                    List<CompetingIn> templist = CompetingIns.OrderByDescending(o => o.Score).ToList();
+                    
+                    List<CompetingIn> scored = CompetingIns.Where(o => o.Attempts > 0).ToList();
+                    List<CompetingIn> notScored = CompetingIns.Where(o => o.Attempts == 0).ToList();
 
-                    //When we know how to log it...
+                    List<CompetingIn> templist = scored.OrderBy(o => o.Score).ToList();
+                    templist.AddRange(notScored);
+
                     comView.ParticipantCount = templist.Count;
 
                     foreach (CompetingIn compin in templist) {
@@ -161,7 +165,7 @@ namespace sw10api.Services {
                             comView.Rank = countrank;
                         } else { countrank++; }
                     }
-
+                    
                     countrank = 1;
                     competitionsForListView.Add(comView);
                 }
@@ -191,9 +195,13 @@ namespace sw10api.Services {
                 CompetitionOverview comView = new CompetitionOverview(competition);
 
                 CompetingIns = dbc.GetCompetitionInByCompetitionId(competition.CompetitionId);
-                comView.Leaderboard = CompetingIns.OrderByDescending(o => o.Score).ToList();
 
-                //When we know how to log it...
+                List<CompetingIn> scored = CompetingIns.Where(o => o.Attempts > 0).ToList();
+                List<CompetingIn> notScored = CompetingIns.Where(o => o.Attempts == 0).ToList();
+
+                comView.Leaderboard = scored.OrderBy(o => o.Score).ToList();
+                comView.Leaderboard.AddRange(notScored);
+
                 comView.ParticipantCount = comView.Leaderboard.Count;
 
                 foreach (CompetingIn compin in comView.Leaderboard) {
@@ -208,7 +216,7 @@ namespace sw10api.Services {
             } catch (Exception e) {
                 Console.WriteLine(e.ToString());
                 DBController dbc = new DBController();
-                dbc.AddLog("GetCompetitionsForListView?carid={carid}&offset={offset}", carid, null, null, e.ToString().Substring(0, Math.Min(e.ToString().Count(), 254)), offset.ToString());
+                dbc.AddLog("GetCompetitionForOverview?competitionid={competitionid}&carid={carid}", carid, null, competitionid, e.ToString().Substring(0, Math.Min(e.ToString().Count(), 254)), "");
                 dbc.Close();
             }
 
