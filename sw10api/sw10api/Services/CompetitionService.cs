@@ -151,15 +151,15 @@ namespace sw10api.Services {
 
                     CompetingIns = dbc.GetCompetitionInByCompetitionId(com.CompetitionId);
                     List<CompetingIn> templist = CompetingIns.OrderByDescending(o => o.Score).ToList();
-                   
+
                     //When we know how to log it...
                     comView.ParticipantCount = templist.Count;
 
-                    foreach(CompetingIn compin in templist) {
-                        if(compin.CarId == carid) {
+                    foreach (CompetingIn compin in templist) {
+                        if (compin.CarId == carid) {
                             comView.AttemptCount = compin.Attempts;
                             comView.Rank = countrank;
-                        } else {  countrank++; }
+                        } else { countrank++; }
                     }
 
                     countrank = 1;
@@ -167,6 +167,43 @@ namespace sw10api.Services {
                 }
 
                 return JsonConvert.SerializeObject(competitionsForListView);
+
+            } catch (Exception e) {
+                Console.WriteLine(e.ToString());
+                DBController dbc = new DBController();
+                dbc.AddLog("GetCompetitionsForListView?carid={carid}&offset={offset}", carid, null, null, e.ToString().Substring(0, Math.Min(e.ToString().Count(), 254)), offset.ToString());
+                dbc.Close();
+            }
+
+            return "";
+        }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetCompetitionForOverview?competitionid={competitionid}&carid={carid}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        public string GetCompetitionForOverview(Int16 competitionid, Int16 carid) {
+            try {
+                DBController dbc = new DBController();
+                int countrank = 1;
+
+                List<CompetingIn> CompetingIns = new List<CompetingIn>();
+                Competition competition = dbc.GetCompetitionByCompetitionId(competitionid);
+                dbc.Close();
+
+                CompetitionOverview comView = new CompetitionOverview(competition);
+
+                CompetingIns = dbc.GetCompetitionInByCompetitionId(competition.CompetitionId);
+                comView.Leaderboard = CompetingIns.OrderByDescending(o => o.Score).ToList();
+
+                //When we know how to log it...
+                comView.ParticipantCount = comView.Leaderboard.Count;
+
+                foreach (CompetingIn compin in comView.Leaderboard) {
+                    if (compin.CarId == carid) {
+                        comView.AttemptCount = compin.Attempts;
+                        comView.Rank = countrank;
+                    } else { countrank++; }
+                }
+
+                return JsonConvert.SerializeObject(comView);
 
             } catch (Exception e) {
                 Console.WriteLine(e.ToString());
