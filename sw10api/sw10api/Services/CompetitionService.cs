@@ -162,6 +162,7 @@ namespace sw10api.Services {
                     foreach (CompetingIn compin in templist) {
                         if (compin.CarId == carid) {
                             comView.AttemptCount = compin.Attempts;
+                            comView.Score = compin.Score;
                             comView.Rank = countrank;
                         } else { countrank++; }
                     }
@@ -207,6 +208,7 @@ namespace sw10api.Services {
                 foreach (CompetingIn compin in comView.Leaderboard) {
                     if (compin.CarId == carid) {
                         comView.AttemptCount = compin.Attempts;
+                        comView.Score = compin.Score;
                         comView.Rank = countrank;
                     } else { countrank++; }
                 }
