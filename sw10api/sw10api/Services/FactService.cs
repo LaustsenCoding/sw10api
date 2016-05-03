@@ -120,7 +120,7 @@ namespace sw10api.Services {
                 dbc.Close();
 
                 Mapmatch.MatchTrip(carId, assignedTripId);
-                Console.WriteLine("Trip " + assignedTripId + " was map-matched.");
+                Console.WriteLine("Trip " + assignedTripId + " was map-matched for CarId " + carId + ".");
 
                 Console.WriteLine("Updating Facts for trip " + assignedTripId + ".");
                 GPSFactUpdater.UpdateRawGPS(carId, assignedTripId);
