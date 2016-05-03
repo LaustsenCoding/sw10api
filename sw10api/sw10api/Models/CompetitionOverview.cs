@@ -19,6 +19,8 @@ namespace sw10api.Models {
         public TemporalInformation StartTemporal { get; set; }
         [DataMember(Name = "stoptemporal")]
         public TemporalInformation StopTemporal { get; set; }
+        [DataMember(Name = "score")]
+        public double Score { get; set; }
         [DataMember(Name = "participantcount")]
         public int ParticipantCount { get; set; }
         [DataMember(Name = "isparticipating")]
